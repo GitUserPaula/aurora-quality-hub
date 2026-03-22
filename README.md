@@ -26,16 +26,16 @@ Aurora is a professional-grade tool designed for Senior Quality Engineers to str
 <summary><b>Click to see Aurora in Action! 🚀</b></summary>
 
 ### 📝 Report Assistant
-*Transforming messy notes into professional bugs.*
+*Transforming messy notes into professional bugs*
 ![Report Assistant Screenshot](aurora_assets/Creating_report.PNG)
 
 ### 🧪 Test Case Generator
-*Clean tables and structured scenarios.*
+*Clean tables and structured scenarios*
 ![Test Case Generator Screenshot](aurora_assets/TCs_scenarios.PNG)
 
 ### ⚖️ Risk Analysis
-*Coming soon 🚀.*
-
+*Coming soon 🚀*
 </details>
+
 ---
 *Developed with 💙 by Pau | Quality Engineer*
