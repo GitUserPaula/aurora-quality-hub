@@ -1,12 +1,13 @@
-# 🌌 Aurora Quality Hub
+# 🌌 Aurora Engineering Suite
 **AI-Powered Strategic Testing Assistant**
 
-Aurora is a professional-grade tool designed for Senior Quality Engineers to streamline documentation, test design, and risk assessment using Google's Gemini 2.5 Flash.
+Aurora is a professional-grade tool designed for Senior Quality Engineers to streamline documentation, test design, API validation and risk assessment using Google's Gemini 2.5 Flash
 
 ## ✨ Key Features
-- **📝 Report Assistant:** Transforms informal notes into professional Markdown bug reports.
-- **🧪 Test Case Generator:** Creates structured test suites (Happy Path & Edge Cases).
-- **⚖️ Risk Analysis:** Evaluates project context to identify technical and functional risks.
+- **📝 Report Assistant:** Transforms informal notes into professional Markdown bug reports
+- **💻 Test Case Generator:** Creates structured test suites (Happy Path & Edge Cases)
+- **🛡️ Risk Analysis:** Evaluates project context to identify technical and functional risks
+- **🔮 JSON Lens:** A structural data auditor leveraging GenAI to detect breaking changes and integration risks in complex JSON payloads
 
 ## 🛠️ Tech Stack
 - **Language:** Python 3.10+
@@ -15,7 +16,7 @@ Aurora is a professional-grade tool designed for Senior Quality Engineers to str
 - **Styling:** Custom CSS "Deep Space" Theme
 
 ## 🚀 Quick Start
-1. Clone the repo: `git clone https://github.com/tu-usuario/aurora-quality-hub.git`
+1. Clone the repo: `git clone`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Create a `.env` file with your `GOOGLE_API_KEY`.
 4. Launch Aurora: `streamlit run app.py`
@@ -27,15 +28,22 @@ Aurora is a professional-grade tool designed for Senior Quality Engineers to str
 
 ### 📝 Report Assistant
 *Transforming messy notes into professional bugs*
-![Report Assistant Screenshot](aurora_assets/Creating_report.PNG)
+![Report Assistant Screenshot](aurora_assets/)
 
-### 🧪 Test Case Generator
+### 💻 Test Case Generator
 *Clean tables and structured scenarios*
-![Test Case Generator Screenshot](aurora_assets/TCs_scenarios.PNG)
+![Test Case Generator Screenshot](aurora_assets/)
 
-### ⚖️ Risk Analysis
-*Coming soon 🚀*
+### 🛡️ Risk Analyzer
+*Strategic evaluation of technical and functional impacts*
+![Risk Analyzer Screenshot](aurora_assets/)
+
+### 🔮 JSON Lens
+*Deep structural analysis of complex JSON payloads*
+![JSON Lens Screenshot](aurora_assets/)
+
 </details>
+
 
 ---
 *Developed with 💙 by Pau | Quality Engineer*

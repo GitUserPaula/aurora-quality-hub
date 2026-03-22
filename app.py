@@ -1,161 +1,138 @@
 import streamlit as st
+from modules import quality_hub, json_lens, risk_analyzer
 import os
 from dotenv import load_dotenv
 from google import genai
 
-# Load environment variables
 load_dotenv()
+api_key = os.getenv("GOOGLE_API_KEY")
+client = genai.Client(api_key=api_key)
 
-# Page Configuration
-st.set_page_config(page_title="Aurora Quality Hub", page_icon="🌌", layout="wide")
+def main():
+    # Branding & THEME
+    st.set_page_config(page_title="Aurora Suite", page_icon="🌌", layout="wide")
+    st.sidebar.markdown("---")
+    st.markdown("""
+        <style>
+                
+        /* Background */
+        .stApp {
+            background-color: #0a0f1e;
+            color: #b0bec5;
+        }
 
-# Custom CSS for the "Aurora" look
-st.markdown("""
-    <style>
-    /* Main Background */
-    .stApp {
-        background-color: #0a0f1e;
-        color: #b0bec5;
-    }
+        /* Sidebar */
+        [data-testid="stSidebarNav"] + div h1, 
+        .st-emotion-cache-10o480m h1, 
+        section[data-testid="stSidebar"] h1 {
+            font-size: 2.2rem !important; 
+            margin-bottom: 0.5rem;
+        }
 
-    /* Sidebar */
-    [data-testid="stSidebar"] {
+        /* Divider */
+        section[data-testid="stSidebar"] hr {
+            border: 1px solid #30477a;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+                
+        [data-testid="stSidebar"] {
         background-color: #16213e;
         border-right: 1px solid #1f3b6d;
-    }
+        }
+                
+        [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {
+            font-size: 1.2rem !important;
+            padding: 10px 0px;
+        }
+ 
+        /* Titles and headers */
+        h2, h3, [data-testid="stHeader"] {
+            color: #00e5ff !important;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+        }
+        h1, [data-testid="stHeader"] {
+            color: #9966ff !important;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+        }
 
-    /* Titles and headers */
-    h1, h2, h3, [data-testid="stHeader"] {
-        color: #00e5ff !important;
-        font-family: 'Courier New', Courier, monospace; /* Toque tech */
-        font-weight: 700;
-    }
+        /* Buttons */
+        .stButton > button {
+            width: 100%;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #00e5ff, #7c4dff);
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+        }
 
-    /* Labels */
-    .stSlider label, .stSelectbox label, .stTextInput label, .stTextArea label, .stRadio label {
-        color: #ffffff;
-    }
-
-    /* Buttons */
-    .stButton > button {
+        .stButton > button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+        }
+        
+        /* Inputs y TextAreas */
+        .stTextInput>div>div>input, .stTextArea>div>div>textarea {
+            background-color: #1a274e;
+            color: #ffffff;
+            border: 1px solid #30477a;
+        }
+        /* Labels */        
+        [data-testid="stWidgetLabel"] p {
+            font-size: 1.4rem !important;
+            color: #00e5ff !important;
+            font-weight: bold !important;
+        }
+        
+    /* Markdown tables */
+        .stMarkdown table {
         width: 100%;
-        border-radius: 8px;
-        background: linear-gradient(45deg, #00e5ff, #7c4dff);
         color: #ffffff;
-        font-weight: bold;
-        border: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
     }
+                
+        </style>
+        """, unsafe_allow_html=True)
 
-    .stButton > button:hover {
-        background: linear-gradient(45deg, #7c4dff, #00e5ff);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(124, 77, 255, 0.5);
-    }
-
-    /* Alerts (Success, Info, Warning) */
-    .stAlert {
-        border-radius: 8px;
-        border: 1px solid #1f3b6d;
-    }
-    .stAlert[data-baseweb="alert"] {
-        background-color: rgba(22, 33, 62, 0.7); /* Transparente */
-    }
+    # Sidebar Navigation
+    st.sidebar.title("🌌 Aurora Suite")
+    st.sidebar.markdown("---")
     
-    /* Input Fields */
-    .stTextInput>div>div>input, .stTextArea>div>div>textarea {
-        background-color: #1a274e;
-        color: #ffffff;
-        border: 1px solid #30477a;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
-
-# Sidebar for Navigation and Settings
-with st.sidebar:
-    st.title("🌌 Aurora Settings")
-    
-    # Priority: Env Variable > Manual Input
-    env_key = os.getenv("GOOGLE_API_KEY")
-    api_key = st.text_input("Gemini API Key", value=env_key if env_key else "", type="password", help="Get your key at Google AI Studio")
-    
-    st.divider()
-    st.subheader("Select Module")
-    module = st.radio(
-        "Workflow:",
-        ["Report Assistant", "Test Case Generator", "Risk Analysis"]
+    selection = st.sidebar.radio(
+        "**Go to Satellite:**", 
+        ["🛰️ Center Command", "🧪 Quality Hub", "🔮 JSON Lens", "🛡️ Risk Analyzer"]
     )
-    
-    st.divider()
-    st.caption("Developed by Pau | Quality Engineer")
 
-# AI Logic Initialization
-if api_key:
-    client = genai.Client(api_key=api_key) 
-else:
-    st.warning("⚠️ Please provide a Gemini API Key in the sidebar.")
+    st.sidebar.markdown("*Developed with 💙 by Pau | Quality Engineer*")
 
-# --- HUB MODULES ---
+    # MODULES
+    if selection == "🛰️ Center Command":
+        render_home()
+    elif selection == "🧪 Quality Hub":
+        quality_hub.display(client)
+    elif selection == "🔮 JSON Lens":
+        json_lens.display(client)
+    elif selection == "🛡️ Risk Analyzer":
+        risk_analyzer.display(client)
 
-if module == "Report Assistant" and api_key:
-    st.header("📝 Report Assistant")
-    st.write("Transform informal notes into professional-grade technical reports.")
+def render_home():
+    st.title("🛰️ Center Command")
+    st.markdown("---")
+    st.markdown(f"### Welcome back, **Pau**! 👩‍🚀")
+    st.write("""
+        All Aurora systems are operational ✨📡 This is your mission control for 
+        high-precision software quality engineering 🕵️‍♀️
+    """)
     
-    user_input = st.text_area("Describe the issue...", placeholder="e.g., The login button is unresponsive on Android 14.")
-    
-    if st.button("Generate Report"):
-        if user_input and api_key:
-            with st.spinner("Aurora is processing the bug..."):
-                prompt = (
-                    f"Act as a Senior QA Engineer. Convert the following description into a formal bug report in Markdown. "
-                    f"Include: Title, Severity (Suggest one), Steps to Reproduce, Actual Result, and Expected Result. "
-                    f"Input: {user_input}"
-                )
-                response = client.models.generate_content(
-                model="models/gemini-2.5-flash", 
-                contents=prompt
-                )
-                st.markdown("---")
-                st.subheader("✨ Aurora's Draft")
-                st.markdown(response.text)
-        else:
-            st.error("Missing description or API Key.")
+    # "Status Report"
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("API Status", "Connected", "Active")
+    col2.metric("Aurora Hub", "v2.5", "Up to date")
+    col3.metric("JSON Lens", "Beta", "Stable")
+    col4.metric("Risk Analyzer", "New", "Release 1.0", delta_color="normal")
 
-elif module == "Test Case Generator" and api_key:
-    st.header("🧪 Test Case Generator")
-    st.write("Generate comprehensive test scenarios based on features or User Stories.")
-    
-    feature = st.text_area("Feature Description:", placeholder="e.g., Implementing a 2FA flow via SMS.", height=150)
-    
-    if st.button("Generate Test Suite"):
-        if feature:
-            with st.spinner("Designing test cases..."):
-                
-                prompt = (
-                    f"As a Senior QA Expert, generate a structured list of test cases for the following feature. "
-                    f"IMPORTANT: Use a clean Markdown table with only these columns: ID, Title, Type (Happy/Edge), and Expected Result. "
-                    f"Keep descriptions concise to avoid formatting issues. "
-                    f"Feature: {feature}"
-                )
-                
-                response = client.models.generate_content(
-                    model="models/gemini-2.5-flash", 
-                    contents=prompt
-                )
-                
-                st.markdown("---")
-                st.subheader("✨ Aurora's Test Suite")
-                
-                with st.container():
-                    st.markdown(response.text)
-                
-                st.download_button("📥 Download Test Suite", response.text, file_name="test_cases.md")
-        else:
-            st.error("Please describe the feature first.")
-
-elif module == "Risk Analysis":
-    st.header("⚖️ Risk Analysis")
-    st.write("Identify potential quality risks before testing starts.")
-    st.info("Module under development... Stay tuned! 🚀")
+if __name__ == "__main__":
+    main()
