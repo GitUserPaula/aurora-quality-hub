@@ -20,5 +20,22 @@ Aurora is a professional-grade tool designed for Senior Quality Engineers to str
 3. Create a `.env` file with your `GOOGLE_API_KEY`.
 4. Launch Aurora: `streamlit run app.py`
 
+## 📸 Visual Showcase
+
+<details>
+<summary><b>Click to see Aurora in Action! 🚀</b></summary>
+
+### 📝 Report Assistant
+*Transforming messy notes into professional bugs.*
+![Report Assistant Screenshot](aurora_assets/Creating_report.PNG)
+
+### 🧪 Test Case Generator
+*Clean tables and structured scenarios.*
+![Test Case Generator Screenshot](aurora_assets/TCs_scenarios.PNG)
+
+### ⚖️ Risk Analysis
+*Coming soon 🚀.*
+
+</details>
 ---
 *Developed with 💙 by Pau | Quality Engineer*

@@ -7,7 +7,6 @@ client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 print("--- Listing available models for your key ---")
 try:
-    # Simplemente listamos los nombres de los modelos
     models = client.models.list()
     for m in models:
         print(f"Model Name: {m.name}")
