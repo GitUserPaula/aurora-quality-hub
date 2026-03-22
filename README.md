@@ -28,19 +28,19 @@ Aurora is a professional-grade tool designed for Senior Quality Engineers to str
 
 ### 📝 Report Assistant
 *Transforming messy notes into professional bugs*
-![Report Assistant Screenshot](aurora_assets/)
+![Report Assistant Screenshot](aurora_assets/quality_hub_report_assistant_2.PNG)
 
 ### 💻 Test Case Generator
 *Clean tables and structured scenarios*
-![Test Case Generator Screenshot](aurora_assets/)
+![Test Case Generator Screenshot](aurora_assets/quality_hub_test_case_generator_2.PNG)
 
 ### 🛡️ Risk Analyzer
 *Strategic evaluation of technical and functional impacts*
-![Risk Analyzer Screenshot](aurora_assets/)
+![Risk Analyzer Screenshot](aurora_assets/risk_analyzer_1.PNG)
 
 ### 🔮 JSON Lens
 *Deep structural analysis of complex JSON payloads*
-![JSON Lens Screenshot](aurora_assets/)
+![JSON Lens Screenshot](aurora_assets/JSON_Lens_prompt.PNG)
 
 </details>
 
