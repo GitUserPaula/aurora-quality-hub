@@ -1,7 +1,7 @@
 # 🌌 Aurora Engineering Suite
 **AI-Powered Strategic Testing Assistant**
 
-Aurora is a professional-grade tool designed for Senior Quality Engineers to streamline documentation, test design, API validation and risk assessment using Google's Gemini 2.5 Flash
+Aurora is a professional-grade tool designed for Quality Engineers to streamline documentation, test design, API validation and risk assessment using Google's Gemini 2.5 Flash
 
 ## ✨ Key Features
 - **📝 Report Assistant:** Transforms informal notes into professional Markdown bug reports
